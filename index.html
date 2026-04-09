@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
-<!-- 카카오 지도 SDK (JavaScript 키를 YOUR_KAKAO_APP_KEY 자리에 입력) -->
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=35fbdef542331b557c5cb6c8c6c9ccb0&autoload=false"></script>
 <style>
 /* ── DESIGN TOKENS — source: weareathleats.com ── */
 :root {
@@ -1541,25 +1541,16 @@ cf.addEventListener('submit', async e => {
 });
 </script>
 
-<!-- 카카오 지도 — SDK 동적 로딩 + 에러 핸들링 -->
+<!-- 카카오 지도 초기화 (SDK는 head에서 정적 로드) -->
 <script>
 (function() {
-  var KAKAO_KEY = '35fbdef542331b557c5cb6c8c6c9ccb0';
-  var COORDS = [37.5045, 127.1004]; // 송파구 송리단길
+  if (typeof kakao === 'undefined' || !kakao.maps) return;
 
-  function fallback(reason) {
-    console.warn('[KakaoMap]', reason);
-    var el = document.getElementById('kakao-map');
-    if (!el) return;
-    el.style.cssText = 'display:flex;align-items:center;justify-content:center;background:#f5f5f3;border:1px solid #e0e0e0;border-radius:8px;height:100%;';
-    el.innerHTML = '<a href="https://map.kakao.com/link/map/송파구송리단길,' + COORDS[0] + ',' + COORDS[1] + '" target="_blank" rel="noopener" style="color:#555;font-size:0.8125rem;text-decoration:underline;">카카오 지도에서 보기 →</a>';
-  }
-
-  function init() {
+  kakao.maps.load(function() {
     var container = document.getElementById('kakao-map');
-    if (!container) return fallback('container not found');
+    if (!container) return;
 
-    var coords = new kakao.maps.LatLng(COORDS[0], COORDS[1]);
+    var coords = new kakao.maps.LatLng(37.5045, 127.1004);
     var map = new kakao.maps.Map(container, { center: coords, level: 4 });
     new kakao.maps.Marker({ map: map, position: coords });
     map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
@@ -1577,23 +1568,7 @@ cf.addEventListener('submit', async e => {
     } else {
       setTimeout(doRelayout, 150);
     }
-    console.log('[KakaoMap] init OK');
-  }
-
-  // SDK 동적 로딩 (head 정적 태그 대신)
-  var s = document.createElement('script');
-  s.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey=' + KAKAO_KEY + '&autoload=false';
-  s.onerror = function() { fallback('SDK script load failed (network/CORS/blocked)'); };
-  s.onload = function() {
-    console.log('[KakaoMap] SDK loaded, kakao:', typeof kakao);
-    if (typeof kakao === 'undefined' || !kakao.maps) return fallback('kakao.maps undefined after SDK load');
-    kakao.maps.load(function() {
-      console.log('[KakaoMap] kakao.maps.load callback fired');
-      try { init(); }
-      catch(e) { fallback('init error: ' + e.message); }
-    });
-  };
-  document.head.appendChild(s);
+  });
 })();
 </script>
 </body>
