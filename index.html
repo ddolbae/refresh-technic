@@ -1547,22 +1547,42 @@ cf.addEventListener('submit', async e => {
 <script>
 window.addEventListener('load', function() {
   if (typeof kakao === 'undefined' || !kakao.maps) {
-    // SDK 로드 실패 (도메인 미등록 등) → 링크 fallback
     var el = document.getElementById('kakao-map');
     if (el) {
-      el.style.cssText = 'display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);';
+      el.style.cssText = 'display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);height:100%;';
       el.innerHTML = '<a href="https://map.kakao.com/link/map/서울송파구송리단길,37.5045,127.1004" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.5);font-size:0.8125rem;">카카오 지도에서 보기 →</a>';
     }
     return;
   }
   var container = document.getElementById('kakao-map');
   if (!container) return;
+
   var coords = new kakao.maps.LatLng(37.5045, 127.1004); // 송파구 송리단길
   var map = new kakao.maps.Map(container, { center: coords, level: 4 });
   new kakao.maps.Marker({ map: map, position: coords });
   map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
-  // reveal 애니메이션 후 크기 재계산
-  setTimeout(function() { map.relayout(); map.setCenter(coords); }, 300);
+
+  function doRelayout() { map.relayout(); map.setCenter(coords); }
+
+  // reveal 부모(.contact-copy)가 visible 클래스를 받는 순간 relayout
+  var revealParent = container.closest('.reveal');
+  if (revealParent) {
+    if (revealParent.classList.contains('visible')) {
+      setTimeout(doRelayout, 100);
+    } else {
+      var mo = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+          if (m.attributeName === 'class' && revealParent.classList.contains('visible')) {
+            setTimeout(doRelayout, 100);
+            mo.disconnect();
+          }
+        });
+      });
+      mo.observe(revealParent, { attributes: true });
+    }
+  } else {
+    setTimeout(doRelayout, 300);
+  }
 });
 </script>
 </body>
