@@ -872,12 +872,16 @@ a.contact-info-item:hover .contact-icon { border-color:var(--primary); }
 .contact-meta-label { display:block; font-size:0.725rem; color:var(--text-muted); margin-bottom:2px; }
 .contact-meta-val { font-size:0.9375rem; font-weight:600; color:var(--text); }
 .contact-map-wrap { margin-top:24px; }
-#kakao-map {
+.kakao-map-box {
   width:100%;
   height:220px;
   border-radius:12px;
   overflow:hidden;
   opacity:0.9;
+}
+#kakao-map {
+  width:100%;
+  height:100%;
 }
 .map-caption { font-size:0.75rem; color:var(--text-muted); margin-top:8px; }
 
@@ -1339,12 +1343,12 @@ footer {
             </div>
             <div>
               <span class="contact-meta-label">사무소 위치</span>
-              <span class="contact-meta-val">서울특별시 중구 명동</span>
+              <span class="contact-meta-val">서울특별시 송파구 송리단길</span>
             </div>
           </div>
         </div>
         <div class="contact-map-wrap">
-          <div id="kakao-map"></div>
+          <div class="kakao-map-box"><div id="kakao-map"></div></div>
           <p class="map-caption">서울 전 지역 · 경기 일부 출장 서비스</p>
         </div>
       </div>
@@ -1547,16 +1551,18 @@ window.addEventListener('load', function() {
     var el = document.getElementById('kakao-map');
     if (el) {
       el.style.cssText = 'display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);';
-      el.innerHTML = '<a href="https://map.kakao.com/link/map/서울중구명동,37.5636,126.9858" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.5);font-size:0.8125rem;">카카오 지도에서 보기 →</a>';
+      el.innerHTML = '<a href="https://map.kakao.com/link/map/서울송파구송리단길,37.5045,127.1004" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.5);font-size:0.8125rem;">카카오 지도에서 보기 →</a>';
     }
     return;
   }
   var container = document.getElementById('kakao-map');
   if (!container) return;
-  var coords = new kakao.maps.LatLng(37.5636, 126.9858);
+  var coords = new kakao.maps.LatLng(37.5045, 127.1004); // 송파구 송리단길
   var map = new kakao.maps.Map(container, { center: coords, level: 4 });
   new kakao.maps.Marker({ map: map, position: coords });
   map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
+  // reveal 애니메이션 후 크기 재계산
+  setTimeout(function() { map.relayout(); map.setCenter(coords); }, 300);
 });
 </script>
 </body>
