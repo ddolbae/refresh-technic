@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
 <!-- 카카오 지도 SDK (JavaScript 키를 YOUR_KAKAO_APP_KEY 자리에 입력) -->
-<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=e83ef19e63ea4cef5b19445825c4bf58"></script>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=e83ef19e63ea4cef5b19445825c4bf58&autoload=false"></script>
 <style>
 /* ── DESIGN TOKENS — source: weareathleats.com ── */
 :root {
@@ -1544,44 +1544,46 @@ cf.addEventListener('submit', async e => {
 
 <!-- 카카오 지도 초기화 -->
 <script>
-window.addEventListener('load', function() {
-  if (typeof kakao === 'undefined' || !kakao.maps) {
-    var el = document.getElementById('kakao-map');
-    if (el) {
-      el.style.cssText = 'display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);height:100%;';
-      el.innerHTML = '<a href="https://map.kakao.com/link/map/서울송파구송리단길,37.5045,127.1004" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.5);font-size:0.8125rem;">카카오 지도에서 보기 →</a>';
-    }
-    return;
-  }
+function showMapFallback() {
+  var box = document.getElementById('kakao-map');
+  if (!box) return;
+  box.style.cssText = 'display:flex;align-items:center;justify-content:center;background:#f5f5f3;border:1px solid #e0e0e0;border-radius:8px;height:100%;';
+  box.innerHTML = '<a href="https://map.kakao.com/link/map/서울송파구송리단길,37.5045,127.1004" target="_blank" rel="noopener" style="color:#555;font-size:0.8125rem;text-decoration:underline;">카카오 지도에서 보기 →</a>';
+}
+
+function initKakaoMap() {
   var container = document.getElementById('kakao-map');
   if (!container) return;
 
-  var coords = new kakao.maps.LatLng(37.5045, 127.1004); // 송파구 송리단길
+  var coords = new kakao.maps.LatLng(37.5045, 127.1004);
   var map = new kakao.maps.Map(container, { center: coords, level: 4 });
   new kakao.maps.Marker({ map: map, position: coords });
   map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
 
   function doRelayout() { map.relayout(); map.setCenter(coords); }
 
-  // reveal 부모(.contact-copy)가 visible 클래스를 받는 순간 relayout
   var revealParent = container.closest('.reveal');
-  if (revealParent) {
-    if (revealParent.classList.contains('visible')) {
-      setTimeout(doRelayout, 100);
-    } else {
-      var mo = new MutationObserver(function(mutations) {
-        mutations.forEach(function(m) {
-          if (m.attributeName === 'class' && revealParent.classList.contains('visible')) {
-            setTimeout(doRelayout, 100);
-            mo.disconnect();
-          }
-        });
+  if (revealParent && !revealParent.classList.contains('visible')) {
+    var mo = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        if (m.attributeName === 'class' && revealParent.classList.contains('visible')) {
+          setTimeout(doRelayout, 100);
+          mo.disconnect();
+        }
       });
-      mo.observe(revealParent, { attributes: true });
-    }
+    });
+    mo.observe(revealParent, { attributes: true });
   } else {
-    setTimeout(doRelayout, 300);
+    setTimeout(doRelayout, 100);
   }
+}
+
+window.addEventListener('load', function() {
+  if (typeof kakao === 'undefined') { showMapFallback(); return; }
+  kakao.maps.load(function() {
+    try { initKakaoMap(); }
+    catch(e) { showMapFallback(); }
+  });
 });
 </script>
 </body>
