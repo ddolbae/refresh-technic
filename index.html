@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=fe7e7b28a6a015100a910be6312cc058&autoload=false"></script>
 <style>
 /* ── DESIGN TOKENS — source: weareathleats.com ── */
 :root {
@@ -872,7 +873,7 @@ a.contact-info-item:hover .contact-icon { border-color:var(--primary); }
 .contact-map-wrap { margin-top:24px; }
 .kakao-map-box {
   width:100%;
-  height:220px;
+  height:286px;
   border-radius:12px;
   overflow:hidden;
   opacity:0.9;
@@ -1346,13 +1347,7 @@ footer {
           </div>
         </div>
         <div class="contact-map-wrap">
-          <iframe
-            src="https://map.kakao.com/link/map/송파구 송리단길,37.5045,127.1004"
-            class="kakao-map-box"
-            style="border:0;display:block;"
-            allowfullscreen loading="lazy"
-            title="사무소 위치 — 서울 송파구 송리단길">
-          </iframe>
+          <div class="kakao-map-box"><div id="kakao-map"></div></div>
         </div>
       </div>
       <div class="reveal" style="transition-delay:.12s">
@@ -1546,5 +1541,28 @@ cf.addEventListener('submit', async e => {
 });
 </script>
 
+<!-- 카카오 지도 초기화 -->
+<script>
+(function() {
+  if (typeof kakao === 'undefined' || !kakao.maps) return;
+  kakao.maps.load(function() {
+    var container = document.getElementById('kakao-map');
+    if (!container) return;
+    var coords = new kakao.maps.LatLng(37.5045, 127.1004);
+    var map = new kakao.maps.Map(container, { center: coords, level: 4 });
+    new kakao.maps.Marker({ map: map, position: coords });
+    map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
+    function doRelayout() { map.relayout(); map.setCenter(coords); }
+    var p = container.closest('.reveal');
+    if (p && !p.classList.contains('visible')) {
+      new MutationObserver(function(_, obs) {
+        if (p.classList.contains('visible')) { setTimeout(doRelayout, 150); obs.disconnect(); }
+      }).observe(p, { attributes: true });
+    } else {
+      setTimeout(doRelayout, 150);
+    }
+  });
+})();
+</script>
 </body>
 </html>
