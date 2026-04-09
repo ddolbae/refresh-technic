@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>REFRESH TECHNIC | 업소용 커피머신 출장 수리 · 서울 당일 대응</title>
+<meta name="description" content="REFRESH TECHNIC. 라마르조코·시모넬리·라심발리 등 이태리 상업용 커피머신 전 기종 출장 수리. 서울 전 지역 당일 방문. 010-2563-9597">
+<meta property="og:title" content="고장 당일, 되살립니다 — REFRESH TECHNIC">
+<meta property="og:description" content="서울 전 지역 당일 출장. 이태리 상업용 커피머신 전 기종 대응. 접수 즉시 엔지니어 출동.">
+<meta property="og:image" content="img/hero.jpg">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<!-- 카카오 지도 SDK (JavaScript 키를 YOUR_KAKAO_APP_KEY 자리에 입력) -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e83ef19e63ea4cef5b19445825c4bf58"></script>
+<style>
+/* ── DESIGN TOKENS — source: weareathleats.com ── */
+:root {
+  --primary:       #7B896F;   /* olive green — confirmed */
+  --primary-dark:  #5E6B55;
+  --primary-light: #EEF1EB;
+  --accent:        #4d65ff;   /* confirmed */
+  --bg:            #ffffff;
+  --bg-alt:        #f5f5f3;
+  --text:          #1a1a1a;
+  --text-body:     #4a4a4a;
+  --text-muted:    #888888;
+  --border:        #e5e5e5;
+  --radius-sm:     4px;
+  --radius-md:     8px;
+  --radius-lg:     16px;
+  --radius-full:   9999px;
+  --shadow-card:   0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+  --nav-h:         64px;
+  --container:     1200px;
+  --section-v:     120px;
+  --section-v-mob: 72px;
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Noto Sans KR', -apple-system, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  color:var(--text-body);
+  background:var(--bg);
+  line-height:1.65;
+}
+img { display:block; width:100%; height:auto; object-fit:cover; }
+a { text-decoration:none; color:inherit; }
+
+/* ── CONTAINER ── */
+.container {
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 40px;
+}
+@media(max-width:768px){ .container { padding:0 20px; } }
+
+/* ── SECTION ── */
+.section {
+  padding:var(--section-v) 0;
+}
+.section-alt { background:var(--bg-alt); }
+@media(max-width:768px){ .section { padding:var(--section-v-mob) 0; } }
+
+/* ── SECTION HEADER ── */
+.section-hd {
+  margin-bottom:64px;
+}
+.section-hd-center { text-align:center; max-width:600px; margin-left:auto; margin-right:auto; margin-bottom:64px; }
+.section-eyebrow {
+  font-family:'Inter', sans-serif;
+  font-size:0.6875rem;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--primary);
+  margin-bottom:16px;
+}
+.section-title {
+  font-family:'Noto Sans KR', -apple-system, 'Segoe UI', sans-serif;
+  font-size:clamp(1.875rem, 3vw, 2.5rem);
+  font-weight:700;
+  color:var(--text);
+  letter-spacing:-0.01em;
+  line-height:1.2;
+  margin-bottom:16px;
+}
+.section-desc {
+  font-size:1.0625rem;
+  color:var(--text-muted);
+  line-height:1.7;
+  max-width:480px;
+}
+@media(max-width:768px){ .section-hd { margin-bottom:40px; } .section-hd-center { margin-bottom:40px; } }
+
+/* ── BUTTONS ── */
+.btn {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-family:'Inter', sans-serif;
+  font-size:0.875rem;
+  font-weight:600;
+  letter-spacing:0.01em;
+  border-radius:var(--radius-full);
+  padding:12px 24px;
+  cursor:pointer;
+  border:none;
+  transition:background 200ms ease, color 200ms ease, opacity 200ms ease;
+  white-space:nowrap;
+}
+.btn-dark {
+  background:var(--text);
+  color:#fff;
+}
+.btn-dark:hover { background:#333; }
+.btn-outline {
+  background:transparent;
+  color:var(--text);
+  border:1.5px solid var(--border);
+}
+.btn-outline:hover { border-color:var(--text); }
+.btn-primary {
+  background:var(--primary);
+  color:#fff;
+}
+.btn-primary:hover { background:var(--primary-dark); }
+
+/* ── REVEAL ── */
+.reveal {
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible {
+  opacity:1;
+  transform:none;
+}
+
+/* ══════════════════════════════
+   NAV — weareathleats spec
+   source: token/nav-implementation.md
+   - Floating glass pill (항상 동일, 스크롤 상태 변화 없음)
+   - 3-column grid: logo | links | cta
+   - Mobile ≤991px: hamburger + 위→아래 슬라이드 패널
+══════════════════════════════ */
+
+/* Outer wrapper: fixed, full-width, 좌우 padding-global */
+.nav-wrapper {
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:3000;
+  padding:0 20px;
+  pointer-events:none;
+}
+
+/* Floating glass pill */
+.nav-bar {
+  position:relative;
+  z-index:10;
+  max-width:1280px;
+  margin:16px auto 0;   /* margin-top: 1rem */
+  background:rgba(0,0,0,0.35);
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
+  border-radius:12px;   /* 0.75rem */
+  padding:12px 24px;    /* 0.75rem 1.5rem */
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  align-items:center;
+  pointer-events:auto;
+}
+
+/* Logo — left */
+.nav-logo {
+  font-family:'Inter', sans-serif;
+  font-size:0.875rem;
+  font-weight:800;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:#fff;
+}
+.nav-logo span { color:var(--primary); }
+
+/* Desktop links — center */
+.nav-links {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  list-style:none;
+}
+.nav-links a {
+  font-family:'Inter', sans-serif;
+  font-size:0.875rem;
+  font-weight:400;
+  color:#fff;
+  letter-spacing:-0.04em;
+  padding:4px 8px;
+  border-radius:6px;
+  transition:background 0.6s cubic-bezier(0.6,0.6,0,1);
+}
+.nav-links a:hover { background:rgba(0,0,0,0.3); }
+
+/* CTA — right */
+.nav-right {
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:8px;
+}
+.nav-cta {
+  font-family:'Inter', sans-serif;
+  font-size:0.8125rem;
+  font-weight:500;
+  letter-spacing:-0.02em;
+  padding:7px 16px;
+  border-radius:6px;
+  background:rgba(255,255,255,0.15);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.25);
+  transition:background 0.6s cubic-bezier(0.6,0.6,0,1);
+  white-space:nowrap;
+}
+.nav-cta:hover { background:rgba(255,255,255,0.28); }
+
+/* Hamburger: 40×40px */
+.nav-ham {
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5.5px;
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  background:none;
+  border:none;
+  padding:4px;
+  border-radius:4px;
+  flex-shrink:0;
+}
+.nav-ham span {
+  display:block;
+  width:22px;
+  height:1.5px;
+  background:#fff;
+  border-radius:1px;
+  transform-origin:center;
+  transition:transform 250ms cubic-bezier(0.215,0.61,0.355,1),
+             opacity 200ms ease,
+             width 250ms ease;
+}
+.nav-ham.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.nav-ham.open span:nth-child(2) { opacity:0; width:0; }
+.nav-ham.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+/* Mobile breakpoint: ≤991px */
+@media(max-width:991px){
+  .nav-bar {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:8px;
+    padding:10px 16px;
+  }
+  .nav-links { display:none; }
+  .nav-right .nav-cta { display:none; }
+  .nav-ham { display:flex; }
+}
+
+/* Mobile menu: 위→아래 translateY 슬라이드
+   source: nav-implementation.md §4 패널 스타일 */
+.mob-menu {
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:2990;
+  padding:0 20px;
+  transform:translateY(-110%);
+  transition:transform 400ms cubic-bezier(0.215,0.61,0.355,1);
+  pointer-events:none;
+}
+.mob-menu.open {
+  transform:translateY(0);
+}
+.mob-menu.open .mob-menu-panel {
+  pointer-events:auto;
+}
+/* 닫힐 때 ease-in */
+.mob-menu.closing {
+  transform:translateY(-110%);
+  transition:transform 400ms cubic-bezier(0.55,0.055,0.675,0.19);
+}
+
+.mob-menu-panel {
+  max-width:1280px;
+  margin:0 auto;
+  margin-top:calc(8px + 56px + 8px); /* nav margin-top + bar height + gap */
+  background:rgba(0,0,0,0.35);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-radius:12px;
+  padding:24px;
+  display:flex;
+  flex-direction:column;
+}
+.mob-menu a {
+  display:block;
+  font-family:'Inter', sans-serif;
+  font-size:1.25rem;
+  font-weight:400;
+  color:#fff;
+  letter-spacing:-0.04em;
+  padding:12px 0;
+  border-bottom:0.5px solid rgba(255,255,255,0.2);
+  transition:color 0.6s cubic-bezier(0.6,0.6,0,1);
+}
+.mob-menu a:first-child { border-top:0.5px solid rgba(255,255,255,0.2); }
+.mob-menu a:hover { color:rgba(255,255,255,0.65); }
+.mob-menu-foot {
+  padding-top:20px;
+}
+.mob-menu-foot a {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  padding:12px 20px;
+  background:rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:8px;
+  font-family:'Inter', sans-serif;
+  font-size:0.9375rem;
+  font-weight:600;
+  color:#fff;
+  letter-spacing:-0.01em;
+  border-bottom:none;
+  transition:background 0.3s ease;
+}
+.mob-menu-foot a:hover { background:rgba(255,255,255,0.25); }
+
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
+.hero {
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  align-items:flex-end;
+  background:#111;
+  overflow:hidden;
+}
+.hero-video {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  filter:brightness(0.45);
+}
+.hero-overlay {
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,0.75) 0%,
+    rgba(0,0,0,0.2) 50%,
+    transparent 100%
+  );
+}
+.hero-body {
+  position:relative;
+  z-index:1;
+  max-width:var(--container);
+  width:100%;
+  margin:0 auto;
+  padding:0 40px 80px;
+}
+.hero-eyebrow {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:'Inter', sans-serif;
+  font-size:0.6875rem;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--primary);
+  margin-bottom:20px;
+  opacity:0;
+  animation:fadeUp 0.6s ease forwards 0.3s;
+}
+.hero-eyebrow::before {
+  content:'';
+  display:block;
+  width:20px;
+  height:1px;
+  background:var(--primary);
+}
+.hero-h1 {
+  font-family:'Noto Sans KR', -apple-system, 'Segoe UI', sans-serif;
+  font-size:clamp(3rem, 7vw, 5.5rem);
+  font-weight:700;
+  color:#fff;
+  letter-spacing:-0.01em;
+  line-height:1.1;
+  margin-bottom:24px;
+  opacity:0;
+  animation:fadeUp 0.6s ease forwards 0.45s;
+}
+.hero-sub {
+  font-size:1rem;
+  color:rgba(255,255,255,0.72);
+  line-height:1.7;
+  max-width:420px;
+  margin-bottom:36px;
+  opacity:0;
+  animation:fadeUp 0.6s ease forwards 0.6s;
+}
+.hero-actions {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  opacity:0;
+  animation:fadeUp 0.6s ease forwards 0.75s;
+}
+.hero-actions .btn-dark {
+  background:#fff;
+  color:var(--text);
+}
+.hero-actions .btn-dark:hover { background:#f0f0f0; }
+.hero-actions .btn-outline {
+  color:#fff;
+  border-color:rgba(255,255,255,0.4);
+}
+.hero-actions .btn-outline:hover { border-color:#fff; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:none; }
+}
+
+@media(max-width:768px){
+  .hero-body { padding:0 20px 60px; }
+  .hero-h1 { font-size:clamp(2.25rem, 10vw, 3.25rem); }
+}
+
+/* Mute button */
+.mute-btn {
+  position:fixed;
+  bottom:28px;
+  right:28px;
+  z-index:100;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:rgba(0,0,0,0.45);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  opacity:0;
+  transition:opacity 300ms ease;
+  color:#fff;
+}
+.mute-btn.visible { opacity:0.7; }
+.mute-btn:hover { opacity:1; }
+.mute-btn svg { width:18px; height:18px; }
+.icon-muted { display:block; }
+.icon-sound { display:none; }
+.mute-btn.sound .icon-muted { display:none; }
+.mute-btn.sound .icon-sound { display:block; }
+
+/* ══════════════════════════════
+   STATS
+══════════════════════════════ */
+.stats-row {
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  border-top:1px solid var(--border);
+}
+.stat-cell {
+  padding:48px 32px;
+  border-right:1px solid var(--border);
+  position:relative;
+  overflow:hidden;
+  cursor:default;
+  transition:background 0.4s ease;
+}
+.stat-cell::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,
+    rgba(123,137,111,0.18) 0%,
+    rgba(123,137,111,0.06) 40%,
+    rgba(94,107,85,0.22) 100%);
+  background-size:200% 200%;
+  opacity:0;
+  transition:opacity 0.4s ease;
+  animation:none;
+}
+.stat-cell:hover::before {
+  opacity:1;
+  animation:gradShift 3s ease infinite;
+}
+@keyframes gradShift {
+  0%   { background-position:0% 50%; }
+  50%  { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
+}
+.stat-cell:hover .stat-num { color:var(--primary); transition:color 0.3s ease; }
+.stat-cell:hover .stat-name { color:var(--text); }
+.stat-cell:last-child { border-right:none; }
+.stat-num {
+  font-family:'Inter', sans-serif;
+  font-size:2.25rem;
+  font-weight:800;
+  color:var(--text);
+  letter-spacing:-0.04em;
+  line-height:1;
+  margin-bottom:10px;
+  position:relative;
+  transition:color 0.3s ease;
+}
+.stat-num em {
+  font-style:normal;
+  font-size:1.125rem;
+  color:var(--primary);
+  margin-left:2px;
+}
+.stat-name {
+  font-size:0.875rem;
+  font-weight:600;
+  color:var(--text);
+  margin-bottom:6px;
+  position:relative;
+}
+.stat-sub {
+  font-size:0.8rem;
+  color:var(--text-muted);
+  line-height:1.5;
+  position:relative;
+}
+@media(max-width:900px){
+  .stats-row { grid-template-columns:repeat(2, 1fr); }
+  .stat-cell:nth-child(2) { border-right:none; }
+  .stat-cell:nth-child(3) { border-top:1px solid var(--border); }
+  .stat-cell:nth-child(4) { border-top:1px solid var(--border); border-right:none; }
+}
+@media(max-width:480px){
+  .stats-row { grid-template-columns:1fr; }
+  .stat-cell { border-right:none; border-top:1px solid var(--border); padding:32px 20px; }
+  .stat-cell:first-child { border-top:none; }
+}
+
+/* ══════════════════════════════
+   SERVICES
+══════════════════════════════ */
+.services-grid {
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+}
+.service-card {
+  background:var(--bg);
+  display:flex;
+  flex-direction:column;
+  transition:background 200ms ease;
+}
+.service-card:hover { background:#fafaf9; }
+.service-img-wrap {
+  aspect-ratio:4/3;
+  overflow:hidden;
+}
+.service-img-wrap img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:grayscale(30%);
+  transition:filter 400ms ease, transform 400ms ease;
+}
+.service-card:hover .service-img-wrap img {
+  filter:grayscale(0%);
+  transform:scale(1.04);
+}
+.service-body {
+  padding:32px 28px 36px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+.service-num {
+  font-family:'Inter', sans-serif;
+  font-size:0.6875rem;
+  font-weight:700;
+  letter-spacing:0.1em;
+  color:var(--primary);
+  margin-bottom:14px;
+}
+.service-name {
+  font-family:'Noto Sans KR', -apple-system, 'Segoe UI', sans-serif;
+  font-size:1.125rem;
+  font-weight:700;
+  color:var(--text);
+  letter-spacing:-0.005em;
+  margin-bottom:12px;
+  line-height:1.3;
+}
+.service-desc {
+  font-size:0.875rem;
+  color:var(--text-muted);
+  line-height:1.7;
+  flex:1;
+  margin-bottom:20px;
+}
+.service-tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+.service-tag {
+  font-size:0.725rem;
+  font-weight:500;
+  color:var(--primary);
+  background:var(--primary-light);
+  padding:4px 10px;
+  border-radius:var(--radius-full);
+  letter-spacing:0.02em;
+}
+@media(max-width:768px){
+  .services-grid { grid-template-columns:1fr; }
+}
+
+/* ══════════════════════════════
+   ABOUT / BRAND STRIP
+══════════════════════════════ */
+.brand-strip {
+  display:flex;
+  align-items:center;
+  gap:64px;
+  padding:var(--section-v) 0;
+}
+.brand-strip-copy { flex:1; max-width:520px; }
+.brand-strip-copy .section-title { margin-bottom:20px; }
+.brand-strip-copy p {
+  font-size:1rem;
+  color:var(--text-muted);
+  line-height:1.8;
+  margin-bottom:16px;
+}
+.brand-strip-copy p:last-of-type { margin-bottom:32px; }
+.brand-strip-media {
+  flex:1;
+  aspect-ratio:3/4;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  max-width:440px;
+}
+.brand-strip-media img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+@media(max-width:900px){
+  .brand-strip { flex-direction:column; gap:40px; }
+  .brand-strip-media { max-width:100%; width:100%; }
+}
+
+/* ══════════════════════════════
+   PROCESS
+══════════════════════════════ */
+.process-list {
+  display:grid;
+  grid-template-columns:repeat(6, 1fr);
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+}
+.process-item {
+  background:var(--bg-alt);
+  padding:32px 24px 36px;
+}
+.process-step {
+  font-family:'Inter', sans-serif;
+  font-size:0.625rem;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  margin-bottom:20px;
+}
+.process-num {
+  font-family:'Inter', sans-serif;
+  font-size:2rem;
+  font-weight:800;
+  color:var(--text);
+  letter-spacing:-0.04em;
+  line-height:1;
+  margin-bottom:16px;
+}
+.process-name {
+  font-size:0.9375rem;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:10px;
+}
+.process-desc {
+  font-size:0.8125rem;
+  color:var(--text-muted);
+  line-height:1.65;
+}
+@media(max-width:1024px){
+  .process-list { grid-template-columns:repeat(3,1fr); }
+}
+@media(max-width:600px){
+  .process-list { grid-template-columns:repeat(2,1fr); }
+}
+
+/* Process photo strip */
+.photo-strip {
+  margin-top:1px;
+  display:grid;
+  grid-template-columns:3fr 2fr;
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-top:none;
+  border-radius:0 0 var(--radius-lg) var(--radius-lg);
+  overflow:hidden;
+}
+.photo-strip-main { aspect-ratio:16/7; overflow:hidden; }
+.photo-strip-main img, .photo-strip-side div img {
+  width:100%; height:100%; object-fit:cover;
+  filter:grayscale(20%);
+  transition:filter 400ms ease, transform 400ms ease;
+}
+.photo-strip-main:hover img { filter:grayscale(0%); transform:scale(1.03); }
+.photo-strip-side { display:grid; grid-template-rows:1fr 1fr; gap:1px; }
+.photo-strip-side div { overflow:hidden; }
+.photo-strip-side div:hover img { filter:grayscale(0%); transform:scale(1.04); }
+@media(max-width:600px){
+  .photo-strip { grid-template-columns:1fr; }
+  .photo-strip-main { aspect-ratio:4/3; }
+  .photo-strip-side { grid-template-rows:auto; grid-template-columns:1fr 1fr; }
+}
+
+/* ══════════════════════════════
+   FAQ
+══════════════════════════════ */
+.faq-layout {
+  display:grid;
+  grid-template-columns:1fr 1.3fr;
+  gap:80px;
+  align-items:start;
+}
+.faq-aside { position:sticky; top:calc(var(--nav-h) + 40px); }
+.faq-aside .section-title { margin-bottom:16px; }
+.faq-aside p { font-size:0.9375rem; color:var(--text-muted); line-height:1.7; margin-bottom:32px; }
+.faq-aside .btn { border-radius:var(--radius-md); }
+.faq-list { border-top:1px solid var(--border); }
+.faq-item { border-bottom:1px solid var(--border); }
+.faq-q {
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:20px 0;
+  font-size:0.9375rem;
+  font-weight:600;
+  color:var(--text);
+  background:none;
+  border:none;
+  text-align:left;
+  cursor:pointer;
+  line-height:1.5;
+}
+.faq-q:hover { color:var(--primary); }
+.faq-icon {
+  flex-shrink:0;
+  width:20px;
+  height:20px;
+  position:relative;
+}
+.faq-icon::before, .faq-icon::after {
+  content:'';
+  position:absolute;
+  background:currentColor;
+  border-radius:1px;
+  top:50%; left:50%;
+  transition:transform 250ms ease, opacity 250ms ease;
+}
+.faq-icon::before { width:10px; height:1.5px; transform:translate(-50%,-50%); }
+.faq-icon::after  { width:1.5px; height:10px; transform:translate(-50%,-50%); }
+.faq-item.open .faq-icon::after { transform:translate(-50%,-50%) rotate(90deg); opacity:0; }
+.faq-a {
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows 280ms ease;
+}
+.faq-item.open .faq-a { grid-template-rows:1fr; }
+.faq-a-inner {
+  overflow:hidden;
+  font-size:0.875rem;
+  color:var(--text-muted);
+  line-height:1.75;
+  padding-bottom:0;
+  transition:padding-bottom 280ms ease;
+}
+.faq-item.open .faq-a-inner { padding-bottom:20px; }
+@media(max-width:768px){
+  .faq-layout { grid-template-columns:1fr; gap:40px; }
+  .faq-aside { position:static; }
+}
+
+/* ══════════════════════════════
+   CONTACT
+══════════════════════════════ */
+.contact-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
+}
+.contact-copy .section-title { margin-bottom:16px; }
+.contact-copy p { font-size:0.9375rem; color:var(--text-muted); line-height:1.7; margin-bottom:40px; }
+.contact-info-list { display:flex; flex-direction:column; gap:0; border-top:1px solid var(--border); }
+.contact-info-item {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:18px 0;
+  border-bottom:1px solid var(--border);
+  color:var(--text);
+  transition:color 200ms ease;
+}
+a.contact-info-item:hover { color:var(--primary); }
+.contact-icon {
+  width:36px; height:36px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  transition:border-color 200ms ease;
+}
+a.contact-info-item:hover .contact-icon { border-color:var(--primary); }
+.contact-icon svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; }
+.contact-meta-label { display:block; font-size:0.725rem; color:var(--text-muted); margin-bottom:2px; }
+.contact-meta-val { font-size:0.9375rem; font-weight:600; color:var(--text); }
+.contact-map-wrap { margin-top:24px; }
+#kakao-map {
+  width:100%;
+  height:220px;
+  border-radius:12px;
+  overflow:hidden;
+  opacity:0.9;
+}
+.map-caption { font-size:0.75rem; color:var(--text-muted); margin-top:8px; }
+
+/* Form */
+.form-card {
+  background:var(--bg-alt);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:40px;
+}
+.form-title {
+  font-family:'Inter', sans-serif;
+  font-size:1.125rem;
+  font-weight:700;
+  color:var(--text);
+  letter-spacing:-0.02em;
+  margin-bottom:6px;
+}
+.form-sub { font-size:0.875rem; color:var(--text-muted); margin-bottom:28px; }
+.fg { margin-bottom:16px; }
+.fg label {
+  display:block;
+  font-size:0.8125rem;
+  font-weight:600;
+  color:var(--text);
+  margin-bottom:6px;
+}
+.fg-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.fg input, .fg select, .fg textarea {
+  width:100%;
+  padding:11px 14px;
+  font-size:0.875rem;
+  font-family:inherit;
+  color:var(--text);
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  outline:none;
+  transition:border-color 200ms ease, box-shadow 200ms ease;
+  -webkit-appearance:none;
+}
+.fg input:focus, .fg textarea:focus {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px var(--primary-light);
+}
+.fg textarea { resize:vertical; min-height:120px; }
+.fg-err {
+  display:none;
+  font-size:0.75rem;
+  color:#e04040;
+  margin-top:4px;
+}
+.fg-agree {
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  font-size:0.8rem;
+  color:var(--text-muted);
+  line-height:1.5;
+  margin-bottom:20px;
+  cursor:pointer;
+}
+.fg-agree input { width:15px; height:15px; flex-shrink:0; accent-color:var(--primary); margin-top:2px; }
+.btn-submit {
+  width:100%;
+  padding:14px;
+  background:var(--text);
+  color:#fff;
+  font-family:'Inter', sans-serif;
+  font-size:0.9375rem;
+  font-weight:600;
+  border:none;
+  border-radius:var(--radius-md);
+  cursor:pointer;
+  transition:background 200ms ease;
+  letter-spacing:0.01em;
+}
+.btn-submit:hover { background:#333; }
+.btn-submit:disabled { opacity:0.6; cursor:not-allowed; }
+.form-ok {
+  display:none;
+  text-align:center;
+  padding:40px 20px;
+}
+.form-ok-icon {
+  width:56px; height:56px;
+  background:var(--primary-light);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 20px;
+}
+.form-ok-icon svg { width:24px; height:24px; stroke:var(--primary); fill:none; stroke-width:2.5; stroke-linecap:round; }
+.form-ok-title { font-family:'Inter', sans-serif; font-size:1.125rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+.form-ok-sub { font-size:0.875rem; color:var(--text-muted); line-height:1.6; }
+.form-ok-sub a { color:var(--primary); font-weight:600; }
+@media(max-width:768px){
+  .contact-grid { grid-template-columns:1fr; gap:48px; }
+  .fg-row { grid-template-columns:1fr; }
+  .form-card { padding:24px; }
+}
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer {
+  background:var(--text);
+  color:rgba(255,255,255,0.5);
+  padding:56px 0 40px;
+}
+.footer-inner {
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 40px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:40px;
+  flex-wrap:wrap;
+}
+.footer-logo {
+  font-family:'Inter', sans-serif;
+  font-size:0.875rem;
+  font-weight:800;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:#fff;
+  margin-bottom:12px;
+}
+.footer-logo span { color:var(--primary); }
+.footer-copy {
+  font-size:0.75rem;
+  line-height:1.7;
+  color:rgba(255,255,255,0.4);
+}
+.footer-links {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:8px;
+}
+.footer-links a {
+  font-size:0.8125rem;
+  color:rgba(255,255,255,0.6);
+  transition:color 200ms ease;
+}
+.footer-links a:hover { color:#fff; }
+@media(max-width:768px){
+  .footer-inner { flex-direction:column; align-items:flex-start; gap:24px; padding:0 20px; }
+  .footer-links { align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- MUTE BUTTON -->
+<button class="mute-btn" id="muteBtn" aria-label="음소거 토글" title="음소거 토글">
+  <svg class="icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+    <line x1="23" y1="9" x2="17" y2="15"/>
+    <line x1="17" y1="9" x2="23" y2="15"/>
+  </svg>
+  <svg class="icon-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+  </svg>
+</button>
+
+<!-- NAV WRAPPER -->
+<div class="nav-wrapper" id="nav" role="navigation" aria-label="메인 네비게이션">
+
+  <!-- Floating glass pill nav bar -->
+  <nav class="nav-bar">
+    <!-- 로고 (left) -->
+    <a href="#home" class="nav-logo">Refresh <span>Technic</span></a>
+
+    <!-- 링크 (center) -->
+    <ul class="nav-links" role="list">
+      <li><a href="#services">서비스</a></li>
+      <li><a href="#process">프로세스</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">문의</a></li>
+    </ul>
+
+    <!-- CTA + 햄버거 (right) -->
+    <div class="nav-right">
+      <a href="tel:01025639597" class="nav-cta">010-2563-9597</a>
+      <button class="nav-ham" id="ham" aria-expanded="false" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 모바일 메뉴 패널 (위→아래 translateY) -->
+  <div class="mob-menu" id="mob" role="dialog" aria-label="모바일 메뉴">
+    <div class="mob-menu-panel">
+      <a href="#services">서비스</a>
+      <a href="#process">프로세스</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">문의</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home" aria-label="히어로">
+  <video class="hero-video" id="heroVid" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="video/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <div class="hero-eyebrow">서울 전 지역 당일 출장</div>
+    <h1 class="hero-h1">고장 당일,<br>되살립니다</h1>
+    <p class="hero-sub">라마르조코·시모넬리·라심발리 등 이태리 상업용 커피머신 전 기종 대응. 접수 즉시 엔지니어가 출동합니다.</p>
+    <div class="hero-actions">
+      <a href="tel:01025639597" class="btn btn-dark">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12.18 19.79 19.79 0 0 1 1.61 3.6 2 2 0 0 1 3.6 1.42h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.85-1.85a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        지금 전화하기
+      </a>
+      <a href="#contact" class="btn btn-outline">문의 신청하기</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats" aria-label="신뢰 지표">
+  <div class="stats-row">
+    <div class="stat-cell reveal">
+      <div class="stat-num">당일<em>출장</em></div>
+      <div class="stat-name">서울 전 지역</div>
+      <div class="stat-sub">접수 후 당일 방문 원칙</div>
+    </div>
+    <div class="stat-cell reveal" style="transition-delay:.06s">
+      <div class="stat-num">전 기종</div>
+      <div class="stat-name">이태리 상업용 머신</div>
+      <div class="stat-sub">라마르조코 · 시모넬리 · 라심발리</div>
+    </div>
+    <div class="stat-cell reveal" style="transition-delay:.12s">
+      <div class="stat-num"><span data-countup="30" data-suffix="">0</span>일<em>보증</em></div>
+      <div class="stat-name">무상 재수리</div>
+      <div class="stat-sub">동일 증상 30일 이내 무료</div>
+    </div>
+    <div class="stat-cell reveal" style="transition-delay:.18s">
+      <div class="stat-num">원스톱</div>
+      <div class="stat-name">수리 · 오버홀 · 점검</div>
+      <div class="stat-sub">전 서비스 단일 창구</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services" aria-label="서비스">
+  <div class="container">
+    <div class="section-hd reveal">
+      <div class="section-eyebrow">Services</div>
+      <h2 class="section-title">3가지 핵심 서비스</h2>
+      <p class="section-desc">고장부터 예방까지. 커피머신의 전 생애주기를 책임집니다.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal" style="transition-delay:.05s">
+        <div class="service-img-wrap">
+          <img src="img/photo-gasket.jpg" alt="헤드가스켓 교체 — 출장 수리" loading="lazy">
+        </div>
+        <div class="service-body">
+          <div class="service-num">01 — 출장 수리</div>
+          <div class="service-name">고장 접수 즉시 당일 방문</div>
+          <p class="service-desc">솔레노이드 밸브·헤드가스켓·펌프 등 주요 부품을 현장에서 즉시 교체합니다. 서울 전 지역 당일 출동.</p>
+          <div class="service-tags">
+            <span class="service-tag">당일 출장</span>
+            <span class="service-tag">부품 상시 보유</span>
+            <span class="service-tag">현장 교체</span>
+          </div>
+        </div>
+      </div>
+      <div class="service-card reveal" style="transition-delay:.12s">
+        <div class="service-img-wrap">
+          <img src="img/photo-inspection.jpg" alt="엔지니어 점검 — 오버홀" loading="lazy">
+        </div>
+        <div class="service-body">
+          <div class="service-num">02 — 오버홀</div>
+          <div class="service-name">전체 분해 정비로 수명 연장</div>
+          <p class="service-desc">보일러·그룹헤드·펌프 전체 분해 후 재조립. 신품 구매 대비 1/3 비용으로 장비 수명을 대폭 연장합니다.</p>
+          <div class="service-tags">
+            <span class="service-tag">전체 분해정비</span>
+            <span class="service-tag">수명 연장</span>
+            <span class="service-tag">디스케일링</span>
+          </div>
+        </div>
+      </div>
+      <div class="service-card reveal" style="transition-delay:.20s">
+        <div class="service-img-wrap">
+          <img src="img/photo-crema.jpg" alt="크레마 — 정기점검 결과" loading="lazy">
+        </div>
+        <div class="service-body">
+          <div class="service-num">03 — 정기점검</div>
+          <div class="service-name">고장 전에 잡는 예방 정비</div>
+          <p class="service-desc">월·분기 단위 예방정비로 고장을 선제 방어합니다. 헤드가스켓·샤워스크린 정기 교체와 디스케일링 포함.</p>
+          <div class="service-tags">
+            <span class="service-tag">예방정비</span>
+            <span class="service-tag">정기 방문</span>
+            <span class="service-tag">구독형</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND / ABOUT -->
+<section class="section section-alt" id="about" aria-label="브랜드 소개">
+  <div class="container">
+    <div class="brand-strip">
+      <div class="brand-strip-copy reveal">
+        <div class="section-eyebrow">About</div>
+        <h2 class="section-title">카페 영업,<br>멈추지 마세요</h2>
+        <p>커피머신 고장은 곧 영업 중단입니다. 저희는 그 시간을 최소화하기 위해 서울 전 지역 당일 출장을 원칙으로 운영합니다.</p>
+        <p>라마르조코, 시모넬리, 라심발리, 가지아 등 이태리 상업용 에스프레소 머신 전 기종에 대응하며, 주요 소모품과 부품을 항상 차에 상비하고 출동합니다.</p>
+        <a href="#contact" class="btn btn-dark">문의하기</a>
+      </div>
+      <div class="brand-strip-media reveal" style="transition-delay:.15s">
+        <img src="img/photo-espresso.jpg" alt="에스프레소 추출 — REFRESH TECHNIC 서비스 결과" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process" aria-label="서비스 프로세스">
+  <div class="container">
+    <div class="section-hd-center reveal">
+      <div class="section-eyebrow">Process</div>
+      <h2 class="section-title">전화 한 통으로 시작합니다</h2>
+    </div>
+    <div class="process-list">
+      <div class="process-item reveal" style="transition-delay:.04s">
+        <div class="process-step">Step</div>
+        <div class="process-num">01</div>
+        <div class="process-name">접수</div>
+        <p class="process-desc">전화 또는 카톡으로 기종과 증상을 알려주세요.</p>
+      </div>
+      <div class="process-item reveal" style="transition-delay:.08s">
+        <div class="process-step">Step</div>
+        <div class="process-num">02</div>
+        <div class="process-name">진단 상담</div>
+        <p class="process-desc">증상 기반으로 원인을 추정하고 출장 일정을 확정합니다.</p>
+      </div>
+      <div class="process-item reveal" style="transition-delay:.12s">
+        <div class="process-step">Step</div>
+        <div class="process-num">03</div>
+        <div class="process-name">당일 방문</div>
+        <p class="process-desc">서울 전 지역 당일 출장. 주요 부품은 항상 차에 상비합니다.</p>
+      </div>
+      <div class="process-item reveal" style="transition-delay:.16s">
+        <div class="process-step">Step</div>
+        <div class="process-num">04</div>
+        <div class="process-name">현장 수리</div>
+        <p class="process-desc">정밀 진단 후 부품 교체 및 수리를 진행합니다.</p>
+      </div>
+      <div class="process-item reveal" style="transition-delay:.20s">
+        <div class="process-step">Step</div>
+        <div class="process-num">05</div>
+        <div class="process-name">추출 테스트</div>
+        <p class="process-desc">수리 후 커피 추출 상태를 직접 확인합니다.</p>
+      </div>
+      <div class="process-item reveal" style="transition-delay:.24s">
+        <div class="process-step">Step</div>
+        <div class="process-num">06</div>
+        <div class="process-name">사후 보증</div>
+        <p class="process-desc">동일 증상 30일 이내 무상 재수리를 보장합니다.</p>
+      </div>
+    </div>
+    <div class="photo-strip reveal" style="transition-delay:.1s">
+      <div class="photo-strip-main">
+        <img src="img/photo-espresso.jpg" alt="에스프레소 추출" loading="lazy">
+      </div>
+      <div class="photo-strip-side">
+        <div><img src="img/photo-owner.jpg" alt="카페 고객 만족" loading="lazy"></div>
+        <div><img src="img/photo-inspection.jpg" alt="엔지니어 점검" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-alt" id="faq" aria-label="자주 묻는 질문">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="faq-aside reveal">
+        <div class="section-eyebrow">FAQ</div>
+        <h2 class="section-title">자주 묻는 질문</h2>
+        <p>더 궁금한 점은 전화로 바로 문의해주세요. 증상과 기종을 알려주시면 즉시 상담해 드립니다.</p>
+        <a href="tel:01025639597" class="btn btn-dark">010-2563-9597</a>
+      </div>
+      <div class="faq-list reveal" style="transition-delay:.1s">
+        <div class="faq-item">
+          <button class="faq-q">출장비가 따로 있나요?<span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">서울 지역은 출장비 없이 수리비만 청구됩니다. 경기 지역은 상담 시 사전 안내해 드립니다.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">어떤 브랜드 수리가 가능한가요?<span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">라마르조코, 시모넬리, 라심발리, 가지아, 달라코르테 등 이태리 상업용 에스프레소 머신 전 기종 대응합니다.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">당일 출장이 항상 가능한가요?<span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">서울 내 접수 기준 당일 방문을 원칙으로 합니다. 일정이 맞지 않을 경우 익일 방문으로 조율합니다.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">오버홀은 언제 받아야 하나요?<span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">구매 후 3~5년 경과, 또는 추출 압력 저하·온수 불량·스팀 약화 증상이 반복될 때 권장합니다. 신품 구매 대비 1/3~1/5 비용으로 장비 수명을 연장할 수 있습니다.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">정기점검 계약은 어떻게 운영되나요?<span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">월 또는 분기 단위로 방문하여 헤드가스켓·샤워스크린 교체, 내부 디스케일링, 추출 압력·온도 점검을 진행합니다.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">수리 후 보증이 있나요?<span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">동일 증상 재발 시 30일 이내 무상 재수리합니다.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">커피에 미세 가루가 섞여 나와요.<span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">바스켓필터 구멍이 넓어진 경우입니다. 새 바스켓필터로 교체하면 바로 해결됩니다. 기종과 증상 사진을 카톡으로 보내주시면 정확히 진단해 드립니다.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact" aria-label="문의하기">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-copy reveal">
+        <div class="section-eyebrow">Contact</div>
+        <h2 class="section-title">지금 바로 문의하세요</h2>
+        <p>전화 한 통이면 충분합니다. 증상과 기종을 알려주시면 즉시 상담해 드립니다.</p>
+        <div class="contact-info-list">
+          <a href="tel:01025639597" class="contact-info-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12.18 19.79 19.79 0 0 1 1.61 3.6 2 2 0 0 1 3.6 1.42h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.85-1.85a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <span class="contact-meta-label">전화 문의</span>
+              <span class="contact-meta-val">010-2563-9597</span>
+            </div>
+          </a>
+          <a href="mailto:refreshtechnic@gmail.com" class="contact-info-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <span class="contact-meta-label">이메일</span>
+              <span class="contact-meta-val">refreshtechnic@gmail.com</span>
+            </div>
+          </a>
+          <div class="contact-info-item" style="cursor:default">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <span class="contact-meta-label">사무소 위치</span>
+              <span class="contact-meta-val">서울특별시 중구 명동</span>
+            </div>
+          </div>
+        </div>
+        <div class="contact-map-wrap">
+          <div id="kakao-map"></div>
+          <p class="map-caption">서울 전 지역 · 경기 일부 출장 서비스</p>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:.12s">
+        <div class="form-card" id="formBody">
+          <div class="form-title">문의 신청</div>
+          <p class="form-sub">빠르게 연락드리겠습니다.</p>
+          <form id="cf" novalidate>
+            <div class="fg-row">
+              <div class="fg">
+                <label for="nm">이름 *</label>
+                <input type="text" id="nm" name="name" placeholder="홍길동" required autocomplete="name">
+                <div class="fg-err" id="nmErr">이름을 입력해주세요.</div>
+              </div>
+              <div class="fg">
+                <label for="ph">연락처 *</label>
+                <input type="tel" id="ph" name="phone" placeholder="010-0000-0000" required autocomplete="tel">
+                <div class="fg-err" id="phErr">연락처를 입력해주세요.</div>
+              </div>
+            </div>
+            <div class="fg">
+              <label for="em">이메일</label>
+              <input type="email" id="em" name="email" placeholder="email@example.com" autocomplete="email">
+            </div>
+            <div class="fg">
+              <label for="mg">문의 내용 *</label>
+              <textarea id="mg" name="message" placeholder="기종명과 증상을 간단히 알려주세요." required></textarea>
+              <div class="fg-err" id="mgErr">문의 내용을 입력해주세요.</div>
+            </div>
+            <label class="fg-agree">
+              <input type="checkbox" id="ag" required>
+              개인정보 수집 및 이용에 동의합니다. (상담 목적, 수집 항목: 이름·연락처·이메일)
+            </label>
+            <button type="submit" class="btn-submit" id="sbmt">상담 신청하기</button>
+          </form>
+        </div>
+        <div class="form-ok" id="fOk">
+          <div class="form-ok-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="form-ok-title">신청이 완료되었습니다.</div>
+          <p class="form-ok-sub">빠르게 연락드리겠습니다.<br>급하신 분은 <a href="tel:01025639597">010-2563-9597</a>로 전화주세요.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Refresh <span>Technic</span></div>
+      <div class="footer-copy">
+        업소용 커피머신 출장 수리 전문 · Seoul, Korea<br>
+        © 2026 REFRESH TECHNIC. All rights reserved.
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="tel:01025639597">010-2563-9597</a>
+      <a href="mailto:refreshtechnic@gmail.com">refreshtechnic@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* NAV — 스크롤 상태 변화 없음 (weareathleats spec: 항상 glass pill) */
+
+/* HAMBURGER — 위→아래 translateY 슬라이드 (source: nav-implementation.md §4) */
+const ham = document.getElementById('ham');
+const mob = document.getElementById('mob');
+
+function openMenu() {
+  ham.classList.add('open');
+  mob.classList.remove('closing');
+  mob.classList.add('open');
+  ham.setAttribute('aria-expanded', 'true');
+  /* body scroll lock 미적용 — weareathleats 방식과 동일 */
+}
+
+function closeMenu() {
+  ham.classList.remove('open');
+  mob.classList.add('closing');
+  mob.classList.remove('open');
+  ham.setAttribute('aria-expanded', 'false');
+  mob.addEventListener('transitionend', () => {
+    mob.classList.remove('closing');
+  }, { once: true });
+}
+
+ham.addEventListener('click', () => {
+  ham.classList.contains('open') ? closeMenu() : openMenu();
+});
+
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+/* MUTE BUTTON */
+const vid = document.getElementById('heroVid');
+const muteBtn = document.getElementById('muteBtn');
+// Show mute button once video can play
+vid.addEventListener('canplay', () => muteBtn.classList.add('visible'));
+muteBtn.addEventListener('click', () => {
+  vid.muted = !vid.muted;
+  muteBtn.classList.toggle('sound', !vid.muted);
+});
+
+/* REVEAL */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* COUNTUP */
+document.querySelectorAll('[data-countup]').forEach(el => {
+  const cu = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    cu.unobserve(el);
+    const target = +el.dataset.countup, suffix = el.dataset.suffix || '', dur = 1600;
+    const s = performance.now();
+    const tick = now => {
+      const p = Math.min((now - s) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(ease * target) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, { threshold: 0.4 });
+  cu.observe(el);
+});
+
+/* FAQ */
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+/* FORM */
+const cf = document.getElementById('cf');
+const sbmt = document.getElementById('sbmt');
+const showErr = (id, show) => {
+  const el = document.getElementById(id);
+  if (el) el.style.display = show ? 'block' : 'none';
+};
+cf.addEventListener('submit', async e => {
+  e.preventDefault();
+  const name = cf.name.value.trim();
+  const phone = cf.phone.value.trim();
+  const message = cf.message.value.trim();
+  let ok = true;
+  showErr('nmErr', !name); if (!name) ok = false;
+  showErr('phErr', !phone); if (!phone) ok = false;
+  showErr('mgErr', !message); if (!message) ok = false;
+  if (!cf.ag.checked) { alert('개인정보 수집에 동의해주세요.'); return; }
+  if (!ok) return;
+  sbmt.disabled = true; sbmt.textContent = '전송 중...';
+  try {
+    const r = await fetch('/api/contact', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ name, phone, email: cf.em.value.trim(), message })
+    });
+    if (r.ok) {
+      document.getElementById('formBody').style.display = 'none';
+      document.getElementById('fOk').style.display = 'block';
+    } else throw new Error();
+  } catch {
+    alert('오류가 발생했습니다. 전화로 문의해주세요: 010-2563-9597');
+    sbmt.disabled = false; sbmt.textContent = '상담 신청하기';
+  }
+});
+</script>
+
+<!-- 카카오 지도 초기화 -->
+<script>
+(function initKakaoMap() {
+  if (typeof kakao === 'undefined' || !kakao.maps) return;
+  var container = document.getElementById('kakao-map');
+  if (!container) return;
+  var coords = new kakao.maps.LatLng(37.5636, 126.9858); // 서울 명동
+  var map = new kakao.maps.Map(container, { center: coords, level: 4 });
+  new kakao.maps.Marker({ map: map, position: coords });
+  map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
+})();
+</script>
+</body>
+</html>
