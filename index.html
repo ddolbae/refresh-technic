@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
 <!-- 카카오 지도 SDK (JavaScript 키를 YOUR_KAKAO_APP_KEY 자리에 입력) -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e83ef19e63ea4cef5b19445825c4bf58"></script>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=e83ef19e63ea4cef5b19445825c4bf58"></script>
 <style>
 /* ── DESIGN TOKENS — source: weareathleats.com ── */
 :root {
@@ -1517,15 +1517,23 @@ cf.addEventListener('submit', async e => {
 
 <!-- 카카오 지도 초기화 -->
 <script>
-(function initKakaoMap() {
-  if (typeof kakao === 'undefined' || !kakao.maps) return;
+window.addEventListener('load', function() {
+  if (typeof kakao === 'undefined' || !kakao.maps) {
+    // SDK 로드 실패 (도메인 미등록 등) → 링크 fallback
+    var el = document.getElementById('kakao-map');
+    if (el) {
+      el.style.cssText = 'display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);';
+      el.innerHTML = '<a href="https://map.kakao.com/link/map/서울중구명동,37.5636,126.9858" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.5);font-size:0.8125rem;">카카오 지도에서 보기 →</a>';
+    }
+    return;
+  }
   var container = document.getElementById('kakao-map');
   if (!container) return;
-  var coords = new kakao.maps.LatLng(37.5636, 126.9858); // 서울 명동
+  var coords = new kakao.maps.LatLng(37.5636, 126.9858);
   var map = new kakao.maps.Map(container, { center: coords, level: 4 });
   new kakao.maps.Marker({ map: map, position: coords });
   map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
-})();
+});
 </script>
 </body>
 </html>
