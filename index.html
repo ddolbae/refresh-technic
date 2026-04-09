@@ -157,6 +157,13 @@ a { text-decoration:none; color:inherit; }
   z-index:3000;
   padding:0 20px;
   pointer-events:none;
+  opacity:0;
+  transform:translateY(-20px);
+  transition:opacity 0.4s ease, transform 0.4s ease;
+}
+.nav-wrapper.nav-visible {
+  opacity:1;
+  transform:translateY(0);
 }
 
 /* Floating glass pill */
@@ -1405,6 +1412,23 @@ footer {
 
 <script>
 /* NAV — 스크롤 상태 변화 없음 (weareathleats spec: 항상 glass pill) */
+
+/* NAV — 스크롤 시 표시 */
+(function() {
+  var navWrapper = document.getElementById('nav');
+  var THRESHOLD = 80; // px 스크롤 후 등장
+
+  function onScroll() {
+    if (window.scrollY > THRESHOLD) {
+      navWrapper.classList.add('nav-visible');
+    } else {
+      navWrapper.classList.remove('nav-visible');
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // 초기 실행
+})();
 
 /* HAMBURGER — 위→아래 translateY 슬라이드 (source: nav-implementation.md §4) */
 const ham = document.getElementById('ham');
